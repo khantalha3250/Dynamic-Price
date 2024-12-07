@@ -42,7 +42,7 @@ for i in menu_soup.find_all("li", class_="menu-item-price-amount"):
 print(item_price)
 
 # 2. Get top-rated 5 restaurants in 2 km with similar menu items
-API_KEY = "REMOVED_API_KEY"  # Replace with your actual API key
+API_KEY = "Yelp API_KEY"  # Replace with your actual API key
 ENDPOINT = "https://api.yelp.com/v3/businesses/search"
 HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
