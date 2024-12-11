@@ -1,4 +1,7 @@
-# get_lowest_local_price.py
+# [1] Get lowest local price
+# 1. Get name, address, open times, menu items, & prices for Village from Yelp API
+# 2. Get top-rated 5 restaurants in 2 km with similar menu items
+# 3. DISPLAY menu items & prices for Village + each restaurant
 import os
 import requests
 from bs4 import BeautifulSoup
@@ -33,7 +36,8 @@ def fetch_menu(menu_url, headers):
     except Exception as e:
         print(f"Error parsing menu from {menu_url}: {e}")
         return {"Error": "Menu parsing failed"}
-
+    
+# 1. Get name, address, open times, menu items, & prices for Village from Yelp API
 def fetch_restaurant_details(soup):
     try:
         name = soup.find("h1").text.strip()
@@ -44,7 +48,8 @@ def fetch_restaurant_details(soup):
     except Exception as e:
         print(f"Error extracting details: {e}")
         return None
-
+    
+# 2. Get top-rated 5 restaurants in 2 km with similar menu items
 def fetch_top_restaurants(lat, lon, radius=2000, limit=5, term="Indian Food"):
     url = "https://api.yelp.com/v3/businesses/search"
     params = {"term": term, "latitude": lat, "longitude": lon, "sort_by": "rating", "radius": radius, "limit": limit}
@@ -68,6 +73,7 @@ def fetch_top_restaurants(lat, lon, radius=2000, limit=5, term="Indian Food"):
         print(f"Error fetching top restaurants: {e}")
         return []
 
+# DISPLAY menu items & prices for Village + each restaurant
 def main():
     village_url = "https://www.yelp.com/biz/village-the-soul-of-india-hicksville"
     menu_url = "https://www.yelp.com/menu/village-the-soul-of-india-hicksville"

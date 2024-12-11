@@ -1,7 +1,7 @@
 import joblib
 import pandas as pd
 
-model_path = "multi_output_menu_price_model.pkl"
+model_path = "menu_price_model.pkl"
 columns_path = "model_columns.pkl" 
 targets_path = "model_target_columns.pkl"  
 

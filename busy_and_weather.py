@@ -1,4 +1,7 @@
-# File: get_busy_times_weather.py
+# [2] Get busy times & bad weather
+# 4. Get Village busy times from GMaps API
+# 5. Get temperature & rain near Village
+# 6. DISPLAY both
 import os
 import requests
 from selenium import webdriver
@@ -6,7 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from dotenv import load_dotenv
-from pprint import pprint
+
 
 load_dotenv()
 
@@ -15,6 +18,7 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
 }
 
+# 4. Get Village busy times from GMaps API(used scraping as G map place api dosent provide populer times)
 def fetch_busy_times(place_url):
     """
     Scrape popular times from Google Maps.
@@ -52,6 +56,7 @@ def fetch_busy_times(place_url):
     finally:
         driver.quit()
 
+# Get temperature & rain near Village
 def fetch_weather_data(lat, lon):
     """
     Fetch weather data from the OpenWeatherMap API.
@@ -77,6 +82,7 @@ def fetch_weather_data(lat, lon):
         print(f"Error fetching weather data: {e}")
         return {"Error": "Request failed"}
 
+# 6. DISPLAY both
 def main():
     place_url = "https://www.google.com/maps/place/Village+-+The+Soul+of+India/@40.7665603,-73.5261129,17z/data=!3m1!4b1!4m6!3m5!1s0x89c281752d83843d:0x1f2a365d2207b71c!8m2!3d40.7665603!4d-73.523538!16s%2Fg%2F11thj448_5?entry=ttu&g_ep=EgoyMDI0MTIwNC4wIKXMDSoASAFQAw%3D%3D"
     latitude, longitude = 40.76657652292063, -73.5235058170142
@@ -84,12 +90,12 @@ def main():
     # Fetch busy times
     print("\n=== Busy Times ===")
     busy_times = fetch_busy_times(place_url)
-    pprint(busy_times)
+    print(busy_times)
 
     # Fetch weather data
     print("\n=== Weather Data ===")
     weather = fetch_weather_data(latitude, longitude)
-    pprint(weather)
+    print(weather)
 
 if __name__ == "__main__":
     main()

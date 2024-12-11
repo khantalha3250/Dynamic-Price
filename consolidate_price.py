@@ -1,8 +1,18 @@
+'''This file generating the consolidated price which will help in Assuming dataset
+"soda": {
+        "lowestPrice": 2.5,
+        "villageItemPrice": 2.95,
+        "highestPrice": 3.0
+    },
+      "kheer": {
+        "lowestPrice": 5.95,
+        "villageItemPrice": 6.0,
+        "highestPrice": 6.0
+    },
+'''
 import json
 from pprint import pprint
 from difflib import get_close_matches
-
-
 # Synonym mapping for better normalization
 SYNONYM_MAP = {
     "water bottle": "water",
