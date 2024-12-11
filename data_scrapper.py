@@ -8,6 +8,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pandas as pd
 import json
+from pprint import pprint
+
 
 
 API_KEY = os.getenv("YELP_API_KEY")
@@ -211,39 +213,52 @@ def main():
     latitude, longitude = 40.76657652292063, -73.5235058170142
 
     # Fetch restaurant details
+    print("\n=== Restaurant Details ===")
     soup = fetch_webpage(village_url, HEADERS)
     restaurant_details = fetch_restaurant_details(soup) if soup else {}
     if restaurant_details:
-        print("Restaurant Details:", restaurant_details)
+        pprint(restaurant_details)
+    else:
+        print("No restaurant details available.")
 
     # Fetch Village menu
+    print("\n=== Village Menu ===")
     village_menu = fetch_menu(menu_url, HEADERS)
-    print("Village Menu:", village_menu)
+    pprint(village_menu)
 
     # Fetch top-rated restaurants
+    print("\n=== Top Restaurants ===")
     top_restaurants = fetch_top_restaurants(latitude, longitude)
-    print("Top Restaurants:", top_restaurants)
+    if top_restaurants:
+        pprint(top_restaurants)
+    else:
+        print("No top restaurants found.")
 
     # Fetch menus for all restaurants
-    restaurants_menu = {r["name"]: fetch_menu(r["menu_url"], HEADERS) for r in top_restaurants}
+    print("\n=== Restaurant Menus ===")
+    restaurants_menu = {}
+    for restaurant in top_restaurants:
+        menu = fetch_menu(restaurant["menu_url"], HEADERS)
+        restaurants_menu[restaurant["name"]] = menu
+        print(f"Menu for {restaurant['name']}:")
+        pprint(menu)
 
     # Consolidate prices
+    print("\n=== Consolidated Prices ===")
     consolidated_prices = consolidate_menu_prices(restaurants_menu, restaurant_details.get("name", ""))
-    print("Consolidated Prices:", consolidated_prices)
-
+    pprint(consolidated_prices)
     with open("consolidated_prices.json", "w") as f:
-        json.dump(consolidated_prices, f)
+        json.dump(consolidated_prices, f, indent=4)
 
     # Fetch busy times
+    print("\n=== Busy Times ===")
     busy_times = fetch_busy_times(place_url)
-    print("Busy Times:", busy_times)
+    pprint(busy_times)
 
     # Fetch weather data
+    print("\n=== Weather Data ===")
     weather = fetch_weather_data(latitude, longitude)
-    print("Weather Data:", weather)
-
-
-
+    pprint(weather)
 
 if __name__ == "__main__":
     main()
