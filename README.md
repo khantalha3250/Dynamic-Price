@@ -8,6 +8,13 @@
    ```bash
    cd DynamicPrice
    ```
+2. **Create a .env file**  
+   Create a .env file in to the root folder and paste the below in it:
+
+   ```bash
+   YELP_API_KEY = <YOUR YELP API KEY>
+   OPENWEATHER_API_KEY = <YOUR OPEN WEATHER API KEY>
+   ```
 
 ## Features and Usage
 
