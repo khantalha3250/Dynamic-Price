@@ -1,6 +1,3 @@
-
-
-
 ### Steps to Run
 
 1. **Clone or Download the Repository**  
@@ -8,12 +5,26 @@
    ```bash
    cd DynamicPrice
    ```
-2. **Create a .env file**  
-   Create a .env file in to the root folder and paste the below in it:
+2. **Set Up Environment Variables**  
+   In the root directory of the project, create a .env file to store your API keys. Add the following lines to the .env file:
 
    ```bash
    YELP_API_KEY = <YOUR YELP API KEY>
    OPENWEATHER_API_KEY = <YOUR OPEN WEATHER API KEY>
+   ```
+   Replace <YOUR_YELP_API_KEY> and <YOUR_OPENWEATHER_API_KEY> with your actual API keys.
+
+3. **Create and Activate a Virtual Environment**  
+   Set up a virtual environment to manage project dependencies:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # For Linux/MacOS
+   ./venv/Scripts/activate      # For Windows
+   ```
+4. **Install Dependencies**  
+   Install the required Python packages using the following command:
+   ```bash
+   pip install -r requirements.txt
    ```
 
 ## Features and Usage
