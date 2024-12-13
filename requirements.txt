@@ -1,0 +1,6 @@
+beautifulsoup4==4.12.3
+pandas==2.2.3
+requests==2.31.0
+selenium==4.27.1
+python-dotenv==1.0.1
+joblib==1.4.2
